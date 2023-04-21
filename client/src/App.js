@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
+import ToDoList from "./components/ToDoList/ToDoList";
 
 function App() {
+  const [lists, setLists] = useState([{name:"List Name", tasks:[]}]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <h1>ToDo List App</h1>
+      <div className="Lists">
+        {lists.map((item, index) => (
+          <ToDoList key={index} index={index} list={item} lists={lists} setLists={setLists}/>
+        ))}
+        <button
+          className="newListButton"
+          onClick={() => setLists((prevState) => [...prevState, {name:"List Name", tasks:[]}])}
         >
-          Learn React
-        </a>
-      </header>
+          +
+        </button>
+      </div>
     </div>
   );
 }
