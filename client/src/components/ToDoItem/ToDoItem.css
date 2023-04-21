@@ -1,0 +1,73 @@
+.listItem {
+    border: 2px solid red;
+    padding: 1rem;
+    margin: .5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-items: flex-start;
+}
+.editingTaskInput{
+    margin: .5rem;
+    margin-right: 0;
+    width: 70%;
+    height: auto;
+    /* max-height: 10rem; */
+}
+p {
+    text-align: left;
+    width: 70%;
+    margin: 0.5rem;
+    color: white;
+    cursor: pointer;
+    word-wrap: break-word;
+}
+.complete {
+    border: 2px solid lime;
+
+}
+.complete p{
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: line-through;
+
+}
+.completeItemButton{
+    all: unset;
+    cursor: pointer;
+    justify-self: flex-end;
+    color: white;
+    margin: 0 0 0 1rem;
+    transition: all .5s;
+}
+.completeIcon{
+    vertical-align: middle;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: none;
+    padding: none;
+    color: inherit;
+}
+.deleteItemButton{
+    all: unset;
+    justify-self: flex-end;
+    cursor: pointer;
+    color: white;
+    margin: 0 0 0 0.5rem;
+    transition: all .5s;
+}
+.deleteIcon{
+    vertical-align: middle;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: none;
+    padding: none;
+    color: inherit;
+}
+.completeItemButton:hover{
+    transition: all .25s;
+    color: lime;
+}
+.deleteItemButton:hover{
+    transition: all .25s;
+    color: red;
+}
