@@ -13,7 +13,7 @@ export default function ToDoItem({
 }) {
   return (
     <li
-      className={`listItem task${task.id} ${task.completed ? "complete" : ""}`}
+      className={`listItem task${task.todo_id} ${task.iscomplete ? "complete" : ""}`}
     >
       {editing===index ? (
         
@@ -22,12 +22,12 @@ export default function ToDoItem({
             defaultValue={task.text}
             onKeyUp={(e) => {
               if (e.key === 'Enter'){
-                updateText(task.id, e.target.value);
+                updateText(task.todo_id, e.target.value);
                 setEditing(-1);
               }
             }}
             onBlur={(e) => {
-              updateText(task.id, e.target.value);
+              updateText(task.todo_id, e.target.value);
               setEditing(-1);
             }}
           ></input>
@@ -37,13 +37,13 @@ export default function ToDoItem({
       )}
       <button
         className="completeItemButton"
-        onClick={() => handleComplete(task.id)}
+        onClick={() => handleComplete(task.todo_id)}
       >
         <FaCheckCircle className="completeIcon" />
       </button>
       <button
         className="deleteItemButton"
-        onClick={() => handleDelete(task.id)}
+        onClick={() => handleDelete(task.todo_id)}
       >
         <FaTimesCircle className="deleteIcon" />
       </button>

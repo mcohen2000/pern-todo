@@ -15,30 +15,55 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
     // setLists(newLists);
   };
   const updateText = (id, text) => {
-    // const newList = [...list.tasks];
-    // newList.forEach((item) => {
-    //   if (item.id === id) {
-    //     item.text = text;
-    //   }
-    // });
-    // updateLists(list.name, newList);
+    const updatedTodo = listItems.filter( task => task.todo_id === id);
+    fetch(`http://localhost:9000/todos/${id}`, {
+      method: "PATCH", 
+      headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: text,
+        isComplete: updatedTodo[0].iscomplete
+      }),
+    })
+        .then(res => res.json())
+        .then(data => setListItems((prevState) => prevState.map(item => {
+          if (item.todo_id === data.todo_id){
+            return data;
+          }
+          return item;
+        })));
   };
   const handleComplete = (id) => {
-    // const newList = [...list.tasks];
-    // newList.forEach((item) => {
-    //   if (item.id === id) {
-    //     item.completed = !item.completed;
-    //   }
-    // });
-    // updateLists(list.name, newList);
+    const updatedTodo = listItems.filter( task => task.todo_id === id);
+    fetch(`http://localhost:9000/todos/${id}`, {
+      method: "PATCH", 
+      headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: updatedTodo[0].text,
+        isComplete: !updatedTodo[0].iscomplete
+      }),
+    })
+        .then(res => res.json())
+        .then(data => setListItems((prevState) => prevState.map(item => {
+          if (item.todo_id === data.todo_id){
+            return data;
+          }
+          return item;
+        })));
   };
 
   const handleDelete = (id) => {
-    // make a copy of state without deleted item
-    // const newList = list.tasks.filter((task) => task.id !== id);
-    // updateLists(list.name, newList);
+    fetch(`http://localhost:9000/todos/${id}`, {
+      method: "DELETE",
+    })
+      .then(setListItems((prevState) => (prevState.filter(task => task.todo_id !== id))));
+    
   };
   const submitTask = (task, list) => {
+    let currentDate = new Date().toJSON();
     fetch("http://localhost:9000/todos", {
       method: "POST", 
       headers: {
@@ -46,7 +71,8 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
       },
       body: JSON.stringify({
         text: task,
-        list_id: list
+        list_id: list,
+        created: currentDate
       }),
     })
         .then(res => res.json())
@@ -105,7 +131,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
         {listItems.map((item, index) => (
           <ToDoItem
             task={item}
-            key={index}
+            key={item.todo_id}
             index={index}
             handleDelete={handleDelete}
             updateText={updateText}

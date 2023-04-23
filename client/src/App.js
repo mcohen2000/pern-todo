@@ -5,14 +5,24 @@ import ToDoList from "./components/ToDoList/ToDoList";
 function App() {
   const [lists, setLists] = useState([]);
   function handleNewList() {
-    fetch("http://localhost:9000/lists", {method: "POST"})
+    let currentDate = new Date().toJSON();
+    console.log(currentDate);
+    fetch("http://localhost:9000/lists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        created: currentDate,
+      }),
+    })
         .then(res => res.json())
         .then(data => setLists((prevState) => [...prevState, data]))
   };
   useEffect(() => {
     fetch("http://localhost:9000/lists", {method: "GET"})
         .then(res => res.json())
-        .then(data => setLists(data.rows));
+        .then(data => setLists(data));
   }, [])
   return (
     <div className="App">
