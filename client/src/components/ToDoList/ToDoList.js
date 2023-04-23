@@ -5,14 +5,25 @@ import "./ToDoList.css";
 import { FaTrashAlt } from "react-icons/fa";
 
 export default function ToDoList({ index, list, lists, setLists, todos, setTodos }) {
+  const [editingTitle, setEditingTitle] = useState(false);
+  const [title, setTitle] = useState(list.title);
   const [editing, setEditing] = useState(-1);
   const [listItems, setListItems] = useState([]);
   const [newTask, setNewTask] = useState("");
 
-  const updateLists = (listName, listObj) => {
-    // const newLists = [...lists];
-    // newLists[index] = { name: listName, tasks: listObj };
-    // setLists(newLists);
+  const updateTitle = (id, text) => {
+    fetch(`http://localhost:9000/lists/${id}`, {
+      method: "PATCH", 
+      headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: text,
+      }),
+    })
+  };
+  const handleTitle = (text) => {
+    setTitle(text);
   };
   const updateText = (id, text) => {
     const updatedTodo = listItems.filter( task => task.todo_id === id);
@@ -62,6 +73,13 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
       .then(setListItems((prevState) => (prevState.filter(task => task.todo_id !== id))));
     
   };
+  const deleteList = (id) => {
+    fetch(`http://localhost:9000/lists/${id}`, {
+      method: "DELETE",
+    })
+      .then(setLists((prevState) => (prevState.filter(list => list.list_id !== id))));
+    
+  };
   const submitTask = (task, list) => {
     let currentDate = new Date().toJSON();
     fetch("http://localhost:9000/todos", {
@@ -78,9 +96,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
         .then(res => res.json())
         .then(data => setListItems((prevState) => [...prevState, data]));
   };
-  const handleListName = (text) => {
-    // updateLists(text, list.tasks);
-  };
+  
   // get and filter todos
   useEffect(() => {
     fetch("http://localhost:9000/todos", {method: "GET"})
@@ -91,19 +107,25 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   return (
     <div className="list-wrapper">
       <h3>
-        <input
-          className="listName"
+        {editingTitle ? <input
+          className="listNameInput"
           type="text"
-          value={list.title}
-          onChange={(e) => handleListName(e.target.value)}
-        ></input>
+          value={title}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter'){
+              updateTitle(list.list_id, title);
+              setEditingTitle(false);
+            }
+          }}
+          onBlur={() => {
+            updateTitle(list.list_id, title);
+            setEditingTitle(false)}
+          }
+          onChange={(e) => handleTitle(e.target.value)}
+        ></input> : <p className="listName" onClick={() => setEditingTitle(true)}>{title}</p>}
         <button
           className="deleteListButton"
-          onClick={() => {
-            const newLists = [...lists];
-            newLists.splice(index, 1);
-            setLists(newLists);
-          }}
+          onClick={() => deleteList(list.list_id)}
         >
           <FaTrashAlt className="trashIcon" />
         </button>
