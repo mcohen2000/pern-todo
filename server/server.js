@@ -14,10 +14,33 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.status(200).json({msg: "Server is running!"});
 });
+app.get('/lists', async(req, res) => {
+    try {
+        // const allTodos = await pool.query("SELECT * from todo");
+        const allLists = await pool.query("SELECT * from lists");
+        console.log(allLists);
+        
+        res.status(200).json(allLists);
+    } catch (error) {
+        console.log(error);
+    }
+});
+app.post('/lists', async(req, res) => {
+    try {
+        // need to replace second params with req.user_id
+        const newList = await pool.query("INSERT INTO lists (title, user_email) VALUES ($1, $2) RETURNING *", ["Unnamed List", "test@gmail.com"]);
+        
+        console.log(newList);
+        
+        res.status(200).json(newList.rows[0]);
+    } catch (error) {
+        console.log(error);
+    }
+});
 app.get('/todos', async(req, res) => {
     try {
+        // need to add WHERE user_id = req.user_id and second param with req.user_id
         const allTodos = await pool.query("SELECT * from todo");
-        console.log(allTodos);
         
         res.status(200).json(allTodos);
     } catch (error) {
@@ -27,10 +50,11 @@ app.get('/todos', async(req, res) => {
 app.post('/todos', async(req, res) => {
     try {
         console.log("POST TO DO");
-        const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *", ["test todo"]);
+        const {text , list_id} = req.body;
+        const newTodo = await pool.query("INSERT INTO todo (text, list_id) VALUES($1, $2) RETURNING *", [text, list_id]);
         console.log(newTodo);
         
-        res.status(200).json({...newTodo});
+        res.status(200).json(newTodo.rows[0]);
     } catch (error) {
         console.log(error);
     }
