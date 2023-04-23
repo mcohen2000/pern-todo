@@ -11,7 +11,7 @@ CREATE TABLE lists(
 
 CREATE TABLE todo(
     todo_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-    list_id VARCHAR(255) NOT NULL,
+    list_id uuid NOT NULL REFERENCES lists (list_id) ON DELETE CASCADE,
     text VARCHAR(255) NOT NULL,
     isComplete BOOLEAN DEFAULT FALSE NOT NULL,
     created TIMESTAMP NOT NULL
