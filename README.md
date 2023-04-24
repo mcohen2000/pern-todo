@@ -1,3 +1,3 @@
 # pern-todo
 
-Tech Stack: PostgreSQL, ExpressJS, NodeJS, ReactJS
+Tech Stack: PostgreSQL, ExpressJS, ReactJS, NodeJS
