@@ -2,7 +2,8 @@ const pool = require('../db');
 
 module.exports.getLists = async (req, res) => {
   try {
-    const allLists = await pool.query("SELECT * from lists ORDER BY created");
+    console.log("GET LISTS", req.user)
+    const allLists = await pool.query("SELECT * from lists WHERE user_id = $1 ORDER BY created", [req.user.id]);
     res.status(200).json(allLists.rows);
   } catch (error) {
     console.log(error);
@@ -13,8 +14,8 @@ module.exports.createList = async (req, res) => {
     const { created } = req.body;
     // need to replace second argument with req.user_id
     const newList = await pool.query(
-      "INSERT INTO lists (title, user_email, created) VALUES ($1, $2, $3) RETURNING *",
-      ["Unnamed List", "test@gmail.com", created]
+      "INSERT INTO lists (title, user_id, created) VALUES ($1, $2, $3) RETURNING *",
+      ["Unnamed List", req.user.id, created]
     );
     res.status(200).json(newList.rows[0]);
   } catch (error) {
