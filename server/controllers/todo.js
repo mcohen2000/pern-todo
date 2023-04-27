@@ -3,7 +3,7 @@ const pool = require('../db');
 module.exports.getTodos = async (req, res) => {
   try {
     // need to add WHERE user_id = req.user_id and second param with req.user_id
-    const allTodos = await pool.query("SELECT * from todo ORDER BY created");
+    const allTodos = await pool.query("SELECT * from todo WHERE user_id = $1 ORDER BY created", [req.user.id]);
     res.status(200).json(allTodos);
   } catch (error) {
     console.log(error);
@@ -13,8 +13,8 @@ module.exports.createTodo = async (req, res) => {
   try {
     const { text, list_id, created } = req.body;
     const newTodo = await pool.query(
-      "INSERT INTO todo (text, list_id, created) VALUES($1, $2, $3) RETURNING *",
-      [text, list_id, created]
+      "INSERT INTO todo (text, list_id, user_id, created) VALUES($1, $2, $3, $4) RETURNING *",
+      [text, list_id, req.user.id, created]
     );
     res.status(200).json(newTodo.rows[0]);
   } catch (error) {
