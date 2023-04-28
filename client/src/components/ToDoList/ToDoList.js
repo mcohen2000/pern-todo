@@ -13,7 +13,9 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
 
   const updateTitle = (id, text) => {
     fetch(`http://localhost:9000/lists/${id}`, {
-      method: "PATCH", 
+      method: "PATCH",
+      mode: "cors",
+      credentials: "include", 
       headers: {
       "Content-Type": "application/json",
       },
@@ -28,7 +30,9 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   const updateText = (id, text) => {
     const updatedTodo = listItems.filter( task => task.todo_id === id);
     fetch(`http://localhost:9000/todos/${id}`, {
-      method: "PATCH", 
+      method: "PATCH",
+      mode: "cors",
+      credentials: "include", 
       headers: {
       "Content-Type": "application/json",
       },
@@ -48,7 +52,9 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   const handleComplete = (id) => {
     const updatedTodo = listItems.filter( task => task.todo_id === id);
     fetch(`http://localhost:9000/todos/${id}`, {
-      method: "PATCH", 
+      method: "PATCH",
+      mode: "cors",
+      credentials: "include", 
       headers: {
       "Content-Type": "application/json",
       },
@@ -69,6 +75,8 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   const handleDelete = (id) => {
     fetch(`http://localhost:9000/todos/${id}`, {
       method: "DELETE",
+      mode: "cors",
+      credentials: "include",
     })
       .then(setListItems((prevState) => (prevState.filter(task => task.todo_id !== id))));
     
@@ -76,6 +84,8 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   const deleteList = (id) => {
     fetch(`http://localhost:9000/lists/${id}`, {
       method: "DELETE",
+      mode: "cors",
+      credentials: "include",
     })
       .then(setLists((prevState) => (prevState.filter(list => list.list_id !== id))));
     
@@ -83,7 +93,9 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   const submitTask = (task, list) => {
     let currentDate = new Date().toJSON();
     fetch("http://localhost:9000/todos", {
-      method: "POST", 
+      method: "POST",
+      mode: "cors",
+      credentials: "include", 
       headers: {
       "Content-Type": "application/json",
       },
@@ -99,7 +111,11 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   
   // get and filter todos
   useEffect(() => {
-    fetch("http://localhost:9000/todos", {method: "GET"})
+    fetch("http://localhost:9000/todos", {
+      method: "GET",
+      mode: "cors",
+      credentials: "include",
+    })
         .then(res => res.json())
         .then(data => setListItems(data.rows.filter(task => task.list_id === list.list_id)));
   }, [list.list_id])
