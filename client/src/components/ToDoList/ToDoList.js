@@ -12,7 +12,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   const [newTask, setNewTask] = useState("");
 
   const updateTitle = (id, text) => {
-    fetch(`http://localhost:9000/lists/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/lists/${id}`, {
       method: "PATCH",
       mode: "cors",
       credentials: "include", 
@@ -29,7 +29,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   };
   const updateText = (id, text) => {
     const updatedTodo = listItems.filter( task => task.todo_id === id);
-    fetch(`http://localhost:9000/todos/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/todos/${id}`, {
       method: "PATCH",
       mode: "cors",
       credentials: "include", 
@@ -51,7 +51,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   };
   const handleComplete = (id) => {
     const updatedTodo = listItems.filter( task => task.todo_id === id);
-    fetch(`http://localhost:9000/todos/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/todos/${id}`, {
       method: "PATCH",
       mode: "cors",
       credentials: "include", 
@@ -73,7 +73,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:9000/todos/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/todos/${id}`, {
       method: "DELETE",
       mode: "cors",
       credentials: "include",
@@ -82,7 +82,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
     
   };
   const deleteList = (id) => {
-    fetch(`http://localhost:9000/lists/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/lists/${id}`, {
       method: "DELETE",
       mode: "cors",
       credentials: "include",
@@ -92,7 +92,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   };
   const submitTask = (task, list) => {
     let currentDate = new Date().toJSON();
-    fetch("http://localhost:9000/todos", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/todos`, {
       method: "POST",
       mode: "cors",
       credentials: "include", 
@@ -111,7 +111,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   
   // get and filter todos
   useEffect(() => {
-    fetch("http://localhost:9000/todos", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/todos`, {
       method: "GET",
       mode: "cors",
       credentials: "include",
