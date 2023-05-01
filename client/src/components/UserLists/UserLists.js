@@ -5,7 +5,7 @@ const UserLists = () => {
   const [lists, setLists] = useState([]);
   function handleNewList() {
     let currentDate = new Date().toJSON();
-    fetch("http://localhost:9000/lists", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/lists`, {
       method: "POST",
       mode: "cors",
       credentials: "include",
@@ -20,7 +20,7 @@ const UserLists = () => {
       .then((data) => setLists((prevState) => [...prevState, data]));
   }
   useEffect(() => {
-    fetch("http://localhost:9000/lists", { method: "GET", mode: "cors",
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/lists`, { method: "GET", mode: "cors",
     credentials: "include", })
       .then((res) => res.json())
       .then((data) => setLists(data));
