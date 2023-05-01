@@ -8,7 +8,7 @@ const port = 9000;
 
 const cors = require('cors');
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     exposedHeaders: 'Set-Cookie',
     optionsSuccessStatus: 200
