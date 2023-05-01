@@ -146,7 +146,6 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
           <FaTrashAlt className="trashIcon" />
         </button>
       </h3>
-      <p>{list.list_id}</p>
       <form
         className="addItemForm"
         onSubmit={(e) => {
