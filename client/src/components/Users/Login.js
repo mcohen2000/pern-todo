@@ -25,7 +25,7 @@ const Login = () => {
       },
       body: JSON.stringify(data),
     };
-    fetch(`http://localhost:9000/login`, options).then((res) => res.json()).then((data) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, options).then((res) => res.json()).then((data) => {
       console.log(data);
     if(data.email){
       console.log("redirect!!");

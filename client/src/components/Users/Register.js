@@ -27,12 +27,12 @@ const Register = () => {
       },
       body: JSON.stringify(data),
     };
-    fetch(`http://localhost:9000/register`, options).then((res) => res.json()).then((data) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/register`, options).then((res) => res.json()).then((data) => {
       console.log(data);
-    // if(data.username){
-    //   console.log("redirect!!");
-    //   navigate("/");;
-    // }
+      if(data.email){
+        console.log("redirect!!");
+        navigate("/");
+      }
     });
   }
   
