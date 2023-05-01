@@ -24,7 +24,7 @@ module.exports.register = async (req, res) => {
       { expiresIn: 60 * 60 * 24 * 7 }
     );
     res.cookie(process.env.COOKIE_NAME, token, {
-      // domain: process.env.COOKIE_URL,
+      domain: process.env.COOKIE_URL,
       withCredentials: true,
       httpOnly: true,
       sameSite: process.env.SECURE_COOKIES === "true" ? "secure" : "none",
@@ -66,7 +66,7 @@ module.exports.login = async (req, res) => {
     res
       .status(200)
       .cookie(process.env.COOKIE_NAME, token, {
-        // domain: process.env.COOKIE_URL,
+        domain: process.env.COOKIE_URL,
         withCredentials: true,
         httpOnly: true,
         sameSite: process.env.SECURE_COOKIES === "true" ? "secure" : "none",
@@ -84,7 +84,7 @@ module.exports.logout = async (req, res) => {
     req.user = undefined;
     res
       .clearCookie(process.env.COOKIE_NAME, {
-        // domain: process.env.COOKIE_URL,
+        domain: process.env.COOKIE_URL,
         withCredentials: true,
         httpOnly: true,
         sameSite: process.env.SECURE_COOKIES === "true" ? "secure" : "none",
