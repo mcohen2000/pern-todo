@@ -25,10 +25,10 @@ module.exports.register = async (req, res) => {
     );
     res.cookie(process.env.COOKIE_NAME, token, {
       domain: process.env.COOKIE_URL,
-      withCredentials: true,
+      // withCredentials: true,
       httpOnly: true,
-      sameSite: process.env.SECURE_COOKIES === "true" ? "secure" : "none",
-      secure: process.env.SECURE_COOKIES === "true" ? "true" : "false",
+      sameSite: process.env.SECURE_COOKIES === "true" ? "none" : "strict",
+      secure: process.env.SECURE_COOKIES === "true" ? true : false,
       maxAge: 1000 * 60 * 60 * 24 * 7,
       // signed: true,
     });
@@ -65,10 +65,10 @@ module.exports.login = async (req, res) => {
     );
     res.cookie(process.env.COOKIE_NAME, token, {
       domain: process.env.COOKIE_URL,
-      withCredentials: true,
+      // withCredentials: true,
       httpOnly: true,
-      sameSite: process.env.SECURE_COOKIES === "true" ? "secure" : "none",
-      secure: process.env.SECURE_COOKIES === "true" ? "true" : "false",
+      sameSite: process.env.SECURE_COOKIES === "true" ? "none" : "strict",
+      secure: process.env.SECURE_COOKIES === "true" ? true : false,
       maxAge: 1000 * 60 * 60 * 24 * 7,
       // signed: true,
     });
@@ -81,13 +81,13 @@ module.exports.logout = async (req, res) => {
   try {
     req.user = undefined;
     res.clearCookie(process.env.COOKIE_NAME, {
-        domain: process.env.COOKIE_URL,
-        withCredentials: true,
-        httpOnly: true,
-        sameSite: process.env.SECURE_COOKIES === "true" ? "secure" : "none",
-        secure: process.env.SECURE_COOKIES === "true" ? "true" : "false",
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-        // signed: true,
+      domain: process.env.COOKIE_URL,
+      // withCredentials: true,
+      httpOnly: true,
+      sameSite: process.env.SECURE_COOKIES === "true" ? "none" : "strict",
+      secure: process.env.SECURE_COOKIES === "true" ? true : false,
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      // signed: true,
     });
     res.json({ msg: "Successfully logged out!" });
   } catch (error) {
