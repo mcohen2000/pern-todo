@@ -8,7 +8,7 @@ const port = 9000;
 
 const cors = require('cors');
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: 'https://mcohen2000-pern-todo.onrender.com',
     credentials: true,
     exposedHeaders: 'Set-Cookie',
     optionsSuccessStatus: 200
