@@ -18,7 +18,7 @@ const RootLayout = () => {
       },
     };
     // fetch(`/api/auth`, options)
-    fetch(`http://localhost:9000/auth`, options)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/auth`, options)
       .then((res) => res.json())
       .then((data) => {
         // console.log("user data from auth", data);
