@@ -9,7 +9,7 @@ const RootLayout = () => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const options = {
-      method: "GET",
+      method: "POST",
       mode: "cors",
       credentials: "include",
       headers: {
@@ -18,10 +18,10 @@ const RootLayout = () => {
       },
     };
     // fetch(`/api/auth`, options)
-    fetch(`${process.env.REACT_APP_BACKEND_FULL_URL}/auth`, options)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/auth`, options)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("user data from auth", data);
+        console.log("user data from auth", data);
         setUser(data);
       })
   }, [location]);
