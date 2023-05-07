@@ -9,7 +9,7 @@ const RootLayout = () => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const options = {
-      method: "POST",
+      method: "GET",
       mode: "cors",
       credentials: "include",
       headers: {
