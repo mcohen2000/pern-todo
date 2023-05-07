@@ -22,7 +22,9 @@ const RootLayout = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("user data from auth", data);
-        setUser(data);
+        if (data.email){
+          setUser(data);
+        }
       })
   }, [location]);
   
