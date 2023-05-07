@@ -10,6 +10,7 @@ const UserLists = () => {
       mode: "cors",
       credentials: "include",
       headers: {
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -20,8 +21,15 @@ const UserLists = () => {
       .then((data) => setLists((prevState) => [...prevState, data]));
   }
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/lists`, { method: "GET", mode: "cors",
-    credentials: "include", })
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/lists/all`, { 
+      method: "POST", 
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+     })
       .then((res) => res.json())
       .then((data) => setLists(data));
   }, []);
