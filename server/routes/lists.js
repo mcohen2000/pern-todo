@@ -4,7 +4,8 @@ const catchAsync = require("../utils/catchAsync");
 const lists = require("../controllers/lists");
 const { isLoggedIn } = require("../authenticateJWT");
 
-router.route("/").get(isLoggedIn, catchAsync(lists.getLists)).post(isLoggedIn, catchAsync(lists.createList));
+router.route("/all").post(isLoggedIn, catchAsync(lists.getLists));
+router.route("/").post(isLoggedIn, catchAsync(lists.createList));
 
 router.route("/:id").patch(isLoggedIn, catchAsync(lists.updateListName)).delete(isLoggedIn, catchAsync(lists.deleteList));
 
