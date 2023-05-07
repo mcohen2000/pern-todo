@@ -8,8 +8,8 @@ router.route("/register").post(catchAsync(user.register));
 
 router.route("/login").post(catchAsync(user.login));
 
-router.route("/logout").get(isLoggedIn, catchAsync(user.logout));
+router.route("/logout").post(isLoggedIn, catchAsync(user.logout));
 
-router.route("/auth").get(isLoggedIn, catchAsync(user.auth));
+router.route("/auth").post(isLoggedIn, catchAsync(user.auth));
 
 module.exports = router;

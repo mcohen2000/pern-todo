@@ -18,8 +18,8 @@ const Navbar = () => {
                     <Link to={'/register'}>Register</Link> 
                 </button>
             </>:<p>Welcome back {user.email}! <button onClick={() => {
-                fetch(`http://localhost:9000/logout`, {
-                    method: "GET",
+                fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
+                    method: "POST",
                     mode: "cors",
                     credentials: "include",
                     headers: {
