@@ -5,6 +5,11 @@ const jwt = require("jsonwebtoken");
 module.exports.register = async (req, res) => {
   try {
     const { firstname, lastname, email, password } = req.body;
+    const checkEmailExists = await pool.query("SELECT * from users WHERE email = $1", [email]);
+    console.log(checkEmailExists);
+    if (checkEmailExists.rows.length>0){
+      return res.status(403).json({msg: "An account with this email address already exists!"})
+    }
     const hashedPassword = await bcrypt.hash(
       password,
       Number(process.env.SALT_ROUNDS)
@@ -15,10 +20,10 @@ module.exports.register = async (req, res) => {
     );
     const token = jwt.sign(
       {
-        id: user.rows[0].user_id,
-        email: user.rows[0].email,
-        firstname: user.rows[0].firstname,
-        lastname: user.rows[0].lastname,
+        id: newUser.rows[0].user_id,
+        email: newUser.rows[0].email,
+        firstname: newUser.rows[0].firstname,
+        lastname: newUser.rows[0].lastname,
       },
       process.env.JWT_SECRET,
       { expiresIn: 60 * 60 * 24 * 7 }
@@ -32,7 +37,7 @@ module.exports.register = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24 * 7,
       // signed: true,
     });
-    res.status(200).json({ token });
+    res.status(200).json({ email: newUser.rows[0].email, id: newUser.rows[0].user_id });
   } catch (error) {
     console.log(error);
   }
