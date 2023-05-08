@@ -4,7 +4,8 @@ const catchAsync = require("../utils/catchAsync");
 const todo = require("../controllers/todo");
 const { isLoggedIn } = require("../authenticateJWT");
 
-router.route("/").get(isLoggedIn, catchAsync(todo.getTodos)).post(isLoggedIn, catchAsync(todo.createTodo));
+router.route("/all").post(isLoggedIn, catchAsync(todo.getTodos))
+router.route("/").post(isLoggedIn, catchAsync(todo.createTodo));
 
 router.route("/:id").patch(isLoggedIn, catchAsync(todo.updateTodo)).delete(isLoggedIn, catchAsync(todo.deleteTodo));
 

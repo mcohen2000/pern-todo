@@ -111,8 +111,8 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
   
   // get and filter todos
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/todos`, {
-      method: "GET",
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/todos/all`, {
+      method: "POST",
       mode: "cors",
       credentials: "include",
     })
