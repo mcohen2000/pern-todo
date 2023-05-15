@@ -9,4 +9,72 @@
     justify-content: flex-start;
     text-align: center;
     color: white;
+    nav{
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        h1{
+            // text-align: center;
+            a{
+                text-align: center;
+                color: white;
+                text-decoration: none;
+                transition: all .5s;
+            }
+            a:hover{
+                color: cyan;
+            }
+            margin: 2rem;
+        }
+        .navLinks{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-grow: 1;
+            .listsLink{
+                color: white;
+                padding: .5rem 1rem;
+                margin: 0 .5rem;
+                text-decoration: none;
+                transition: all .5s;
+            } .listsLink:hover{
+                color: cyan;
+            }
+            .userLinks{
+                display: flex;
+                justify-content: center;
+                .userBtn{
+                    background: none;
+                    border: 2px solid white;
+                    color: white;
+                    padding: .5rem 1rem;
+                    margin: 0 .5rem;
+                    cursor: pointer;
+                    text-decoration: none;
+                    transition: all .5s;
+                }
+                .userBtn:hover{
+                    border: 2px solid cyan;
+                    color: cyan;
+                }
+                .registerBtn{
+                    background-color: black;
+                }
+                p{
+                    cursor: default;
+                }      
+            }
+        }
+    }
+}
+@media (max-width: 700px) {
+    .navLinks{
+        width: 100%;
+        flex-direction: column;
+    }
+    
 }
