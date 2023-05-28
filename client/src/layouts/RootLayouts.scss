@@ -9,72 +9,95 @@
     justify-content: flex-start;
     text-align: center;
     color: white;
-    nav{
-        width: 80%;
+    .navWrapper{
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
         justify-content: center;
-        align-items: center;
-        h1{
-            // text-align: center;
-            a{
-                text-align: center;
-                color: white;
-                text-decoration: none;
-                transition: all .5s;
-            }
-            a:hover{
-                color: cyan;
-            }
-            margin: 2rem;
-        }
-        .navLinks{
+        align-self: center;
+        background-color: rgba(0, 52, 149, 0.384);
+        border-bottom: 2px solid white;
+        width: 100%;
+        nav{
+            width: 80%;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: row;
             flex-wrap: wrap;
-            flex-grow: 1;
-            .listsLink{
-                color: white;
-                padding: .5rem 1rem;
-                margin: 0 .5rem;
-                text-decoration: none;
-                transition: all .5s;
-            } .listsLink:hover{
-                color: cyan;
-            }
-            .userLinks{
-                display: flex;
-                justify-content: center;
-                .userBtn{
-                    background: none;
-                    border: 2px solid white;
+            justify-content: center;
+            align-items: center;
+            h1{
+                // text-align: center;
+                a{
+                    text-align: center;
                     color: white;
-                    padding: .5rem 1rem;
-                    margin: 0 .5rem;
-                    cursor: pointer;
                     text-decoration: none;
                     transition: all .5s;
                 }
-                .userBtn:hover{
-                    border: 2px solid cyan;
+                a:hover{
                     color: cyan;
                 }
-                .registerBtn{
-                    background-color: black;
+                margin: 2rem;
+            }
+            .navLinks{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                flex-grow: 1;
+                .listsLink{
+                    color: white;
+                    padding: .5rem 1rem;
+                    margin: 0 .5rem;
+                    text-decoration: none;
+                    transition: all .5s;
+                } .listsLink:hover{
+                    color: cyan;
                 }
-                p{
-                    cursor: default;
-                }      
+                .userLinks{
+                    display: flex;
+                    justify-content: center;
+                    .userBtn{
+                        background: none;
+                        border: 2px solid white;
+                        color: white;
+                        padding: .5rem 1rem;
+                        margin: 0 .5rem;
+                        cursor: pointer;
+                        text-decoration: none;
+                        transition: all .5s;
+                    }
+                    .userBtn:hover{
+                        border: 2px solid cyan;
+                        color: cyan;
+                    }
+                    .registerBtn{
+                        background-color: black;
+                    }
+                    p{
+                        cursor: default;
+                    }      
+                }
             }
         }
     }
 }
 @media (max-width: 700px) {
+    .root-layout{
+        .navWrapper{
+            nav{
+        
+                h1{
+                    margin: 1rem 0 .5rem 0;
+                }
+            }
+
+        }
+    }
     .navLinks{
         width: 100%;
         flex-direction: column;
+        margin: 0 0 1rem 0;
+        .userLinks{
+            margin: 1rem 0 0 0;
+        }
     }
     
 }
