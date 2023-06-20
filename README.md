@@ -1,4 +1,4 @@
-# pern-todo
+# PERN Todo
 
 Tech Stack: PostgreSQL, ExpressJS, ReactJS, NodeJS
 
