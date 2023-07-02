@@ -102,9 +102,9 @@ module.exports.logout = async (req, res) => {
 module.exports.auth = async (req, res) => {
   try {
     if (!req.user) {
-      return res.json({ msg: "Not A Valid User" });
+      return res.status(401).json({ msg: "Not A Valid User" });
     }
-    res.json(req.user);
+    res.status(200).json(req.user);
   } catch (error) {
     console.log(error);
   }
