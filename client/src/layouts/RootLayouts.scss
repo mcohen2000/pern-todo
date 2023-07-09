@@ -54,6 +54,7 @@
                 .userLinks{
                     display: flex;
                     justify-content: center;
+                    margin-left: auto;
                     .userBtn{
                         background: none;
                         border: 2px solid white;
@@ -87,16 +88,17 @@
                 h1{
                     margin: 1rem 0 .5rem 0;
                 }
+                .navLinks{
+                    width: 100%;
+                    flex-direction: column;
+                    margin: 0 0 1rem 0;
+                    .userLinks{
+                        margin: 1rem 0 0 0;
+                        // margin-left: 0;
+                    }
+                }
             }
 
-        }
-    }
-    .navLinks{
-        width: 100%;
-        flex-direction: column;
-        margin: 0 0 1rem 0;
-        .userLinks{
-            margin: 1rem 0 0 0;
         }
     }
     
