@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import ToDoList from "../ToDoList/ToDoList";
+import "./UserLists.scss";
 
 const UserLists = () => {
+  const [activeList, setActiveList] = useState(-1);
   const [lists, setLists] = useState([]);
   function handleNewList() {
     let currentDate = new Date().toJSON();
@@ -35,9 +37,39 @@ const UserLists = () => {
   }, []);
   return (
     <div className='Lists'>
-      {lists.map((item, index) => (
+      
+      <ul className="listsPicker">
+        <h3 className="listsPickerHeader">Your Lists <button className='newListButton' onClick={() => handleNewList()}>
+        +
+      </button></h3>
+      <div className="listButtons">
+        {lists.map((item, index) => {
+          // console.log(item);
+          return(
+            <div key={item.list_id} className="listButtonWrapper" onClick={() => setActiveList(index)}>
+                <p>{item.title}</p>
+              </div>
+        )
+      })}
+      </div>
+    </ul>
+    <div className={`currentList${activeList === -1 ? ' inactive': ' active'}`}>
+      <button className='backButton' onClick={() => setActiveList(-1)}>Back</button>
+
+    {
+      activeList === -1 ? <></> :
+      <ToDoList
+      key={lists[activeList].list_id}
+      list={lists[activeList]}
+      lists={lists}
+      setLists={setLists}
+      setActiveList={setActiveList}
+      />
+    }
+    </div>
+      {/* {lists.map((item, index) => (
         <ToDoList
-          key={index}
+        key={index}
           index={index}
           list={item}
           lists={lists}
@@ -46,7 +78,7 @@ const UserLists = () => {
       ))}
       <button className='newListButton' onClick={() => handleNewList()}>
         +
-      </button>
+      </button> */}
     </div>
   );
 };

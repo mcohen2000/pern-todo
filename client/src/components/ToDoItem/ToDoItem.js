@@ -20,6 +20,7 @@ export default function ToDoItem({
           <input
             className="editingTaskInput"
             defaultValue={task.text}
+            autoFocus
             onKeyUp={(e) => {
               if (e.key === 'Enter'){
                 updateText(task.todo_id, e.target.value);
@@ -33,20 +34,22 @@ export default function ToDoItem({
           ></input>
       
       ) : (
-        <p onClick={() => setEditing(index)}>{task.text}</p>
+        <>
+          <p onClick={() => setEditing(index)}>{task.text}</p>
+          <button
+            className="completeItemButton"
+            onClick={() => handleComplete(task.todo_id)}
+          >
+            <FaCheckCircle className="completeIcon" />
+          </button>
+          <button
+            className="deleteItemButton"
+            onClick={() => handleDelete(task.todo_id)}
+          >
+            <FaTimesCircle className="deleteIcon" />
+          </button>
+        </>
       )}
-      <button
-        className="completeItemButton"
-        onClick={() => handleComplete(task.todo_id)}
-      >
-        <FaCheckCircle className="completeIcon" />
-      </button>
-      <button
-        className="deleteItemButton"
-        onClick={() => handleDelete(task.todo_id)}
-      >
-        <FaTimesCircle className="deleteIcon" />
-      </button>
     </li>
   );
 }

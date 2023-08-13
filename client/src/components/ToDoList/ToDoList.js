@@ -4,7 +4,7 @@ import ToDoItem from "../ToDoItem/ToDoItem";
 import "./ToDoList.css";
 import { FaTrashAlt } from "react-icons/fa";
 
-export default function ToDoList({ index, list, lists, setLists, todos, setTodos }) {
+export default function ToDoList({ list, setLists, setActiveList }) {
   const [editingTitle, setEditingTitle] = useState(false);
   const [title, setTitle] = useState(list.title);
   const [editing, setEditing] = useState(-1);
@@ -22,7 +22,13 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
       body: JSON.stringify({
         title: text,
       }),
-    })
+    }).then(res => res.json())
+    .then(data => setLists((prevState) => prevState.map(item => {
+      if (item.list_id === data.list_id){
+        return data;
+      }
+      return item;
+    })))
   };
   const handleTitle = (text) => {
     setTitle(text);
@@ -87,8 +93,10 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
       mode: "cors",
       credentials: "include",
     })
-      .then(setLists((prevState) => (prevState.filter(list => list.list_id !== id))));
-    
+    .then(() => {
+      setActiveList(-1);
+      setLists((prevState) => (prevState.filter(list => list.list_id !== id)))
+    });
   };
   const submitTask = (task, list) => {
     let currentDate = new Date().toJSON();
@@ -127,6 +135,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
           className="listNameInput"
           type="text"
           value={title}
+          autoFocus
           onKeyUp={(e) => {
             if (e.key === 'Enter'){
               updateTitle(list.list_id, title);
@@ -138,7 +147,7 @@ export default function ToDoList({ index, list, lists, setLists, todos, setTodos
             setEditingTitle(false)}
           }
           onChange={(e) => handleTitle(e.target.value)}
-        ></input> : <p className="listName" onClick={() => setEditingTitle(true)}>{title}</p>}
+        ></input> : <p className="listName" onClick={() => setEditingTitle(true)}>{list.title}</p>}
         <button
           className="deleteListButton"
           onClick={() => deleteList(list.list_id)}
