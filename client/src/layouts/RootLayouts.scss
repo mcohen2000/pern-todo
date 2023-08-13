@@ -1,8 +1,9 @@
 .root-layout{
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,7 +21,7 @@
             width: 80%;
             display: flex;
             flex-direction: row;
-            flex-wrap: wrap;
+            // flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             h1{
@@ -40,7 +41,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                flex-wrap: wrap;
+                // flex-wrap: wrap;
                 flex-grow: 1;
                 .listsLink{
                     color: white;
@@ -80,10 +81,11 @@
         }
     }
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     .root-layout{
         .navWrapper{
             nav{
+                flex-direction: column;
         
                 h1{
                     margin: 1rem 0 .5rem 0;
