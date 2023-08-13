@@ -1,0 +1,162 @@
+.Lists {
+    /* height: 100%; */
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    top: 0;
+    flex-direction: row;
+    overflow-x: auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* flex-wrap: wrap; */
+    .listsPicker{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      position: absolute;
+      /* height: 100%; */
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      margin: 0;
+      /* overflow-y: scroll; */
+      border-right: 2px solid white;
+    
+    }
+    .listsPickerHeader{
+      width: 100%;
+      border-bottom: 2px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 1rem 0;
+    }
+    .listButtons{
+      width: 100%;
+      /* height: 100%; */
+      /* flex-grow: 1; */
+      overflow-y: scroll;
+    }
+    .listButtonWrapper{
+      width: 100%;
+      padding: .5rem 0;
+      border-bottom: 2px solid rgba(255, 255, 255, .65);
+    }
+    .listButtonWrapper:hover p{
+      color: cyan;
+    }
+    .listButtonWrapper:nth-of-type(odd){
+      background: rgba(0,0,0,0.25);
+    }
+    .currentList{
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+      left: 300px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      .backButton{
+        display: none;
+      }
+    }
+    .newListButton{
+      all: none;
+      margin: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+      cursor: pointer;
+      background: none;
+      border: 3px dashed white;
+      border-radius: 100%;
+      color: white;
+      font-size: 2rem;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    .newListButton:hover{
+      transition: all .5s;
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid white;
+      font-size: 2.25rem;
+    }
+}
+@media (max-width: 700px) {
+    .Lists{
+        overflow-x: hidden;
+        .listsPicker{
+            z-index: 1;
+            width:100%;
+            border-right: 0px solid white;
+            .listButtons{
+                .listButtonWrapper p{
+                    text-overflow: ellipsis;
+                }
+
+            }
+        }
+        .currentList{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: absolute;
+            overflow-x: hidden;
+            padding: 0 1rem;
+            z-index: 15;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            background-color: rgb(72, 72, 72);
+            transition: left 1s;
+            border-left: 2px solid white;
+            .backButton{
+                cursor: pointer;
+                margin: 1rem 0 0 0;
+                padding: .25rem .5rem;
+                border-radius: 5px;
+                align-self: flex-start;
+                border: 2px solid white;
+                background: transparent;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .currentList.inactive{
+            left: 100%;
+        }
+        .newListButton{
+            font-size: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+        }
+        .list-wrapper{
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            margin: 0;
+            padding: 0 1rem;
+            border: 0px solid white;
+            border-radius: 0;
+            // padding-bottom: 0;
+            .addItemForm{
+                margin-right: .5rem;
+                .newTaskInput{
+                    flex-grow: 1;
+                }
+                .addItemButton{
+                    white-space: nowrap;
+                }    
+            } 
+        }
+    }
+}
