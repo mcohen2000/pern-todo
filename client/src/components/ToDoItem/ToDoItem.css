@@ -4,17 +4,17 @@
     margin: .5rem;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-items: flex-start;
 }
 .editingTaskInput{
     margin: .5rem;
-    margin-right: 0;
-    width: 70%;
+    width: 100%;
     height: auto;
     /* max-height: 10rem; */
 }
 p {
+    flex-grow: 1;
     text-align: left;
     width: 70%;
     margin: 0.5rem;
