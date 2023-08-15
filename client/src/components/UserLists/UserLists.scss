@@ -112,10 +112,11 @@
             padding: 0 1rem;
             z-index: 15;
             left: -2px;
+            right: 0;
             top: 0;
             bottom: 0;
             background-color: rgb(72, 72, 72);
-            transition: left 1s;
+            transition: left 1s, right 1s;
             border-left: 2px solid white;
             .backButton{
                 cursor: pointer;
@@ -133,10 +134,12 @@
         }
         .currentList.inactive{
             left: 100%;
+            right: -100%;
         }
         .newListButton{
             font-size: 1.5rem;
             width: 2rem;
+            min-width: 2rem;
             height: 2rem;
         }
         .list-wrapper{
