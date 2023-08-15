@@ -13,7 +13,7 @@
     height: auto;
     /* max-height: 10rem; */
 }
-p {
+.listItem p {
     flex-grow: 1;
     text-align: left;
     width: 70%;
