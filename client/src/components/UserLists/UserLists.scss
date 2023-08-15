@@ -1,5 +1,5 @@
 .Lists {
-    /* height: 100%; */
+    // height: 100%; 
     position: relative;
     width: 100%;
     display: flex;
@@ -27,6 +27,7 @@
     }
     .listsPickerHeader{
       width: 100%;
+      height: 4rem;
       border-bottom: 2px solid white;
       display: flex;
       justify-content: center;
@@ -72,6 +73,7 @@
       justify-content: center;
       align-items: center;
       align-self: center;
+      vertical-align: middle;
       cursor: pointer;
       background: none;
       border: 3px dashed white;
@@ -85,7 +87,7 @@
       transition: all .5s;
       background: rgba(255, 255, 255, 0.2);
       border: 3px solid white;
-      font-size: 2.25rem;
+      // font-size: 2.25rem;
     }
 }
 @media (max-width: 700px) {
@@ -138,9 +140,12 @@
         }
         .newListButton{
             font-size: 1.5rem;
-            width: 2rem;
-            min-width: 2rem;
-            height: 2rem;
+            padding: 0;
+            // white-space: nowrap;
+            width: 2.5rem;
+            min-width: 2.5rem;
+            height: 2.5rem;
+            min-height: 2.5rem;
         }
         .list-wrapper{
             width: 100%;
