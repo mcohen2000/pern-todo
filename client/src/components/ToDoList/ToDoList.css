@@ -80,6 +80,7 @@ ul {
     margin: .25rem;
     padding: .5rem;
     border-radius: 100%;
+    line-height: 1rem;
     transition: all .5s;
 }
 .trashIcon{
